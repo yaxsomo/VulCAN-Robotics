@@ -29,6 +29,12 @@ git clone https://github.com/yaxsomo/VulCAN-Robotics.git
 cd VulCAN-Robotics
 ```
 
+Installez le package ESP32 sur Arduino IDE via les preferences : 
+- Ajoutez le lien suivant dans les preferences : 
+    - https://raw.githubusercontent.com/espressif/arduino-esp32/gh-pages/package_esp32_index.json
+    [IDE Photo here]
+- Vous pourrez ensuite installer le package esp32 via le Boards Manager : 
+    [Boards manager photo here]
 ...
 
 ## Démarrage
