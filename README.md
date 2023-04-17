@@ -40,6 +40,10 @@ Installez le package ESP32 sur Arduino IDE via les preferences :
 
 Tutoriel complete à ce lien : [Tutoriel d'installation](https://randomnerdtutorials.com/installing-the-esp32-board-in-arduino-ide-windows-instructions/)
 
+Il faudra ensuite installer la librairie CAN.h :
+
+[Github CAN.h](https://github.com/sandeepmistry/arduino-CAN)
+
 ## Démarrage
 
 Pour démarrer le projet, il vous suffira de charger le code dans les deux ESP32, et cliquer sur le bouton RST des cartes.
