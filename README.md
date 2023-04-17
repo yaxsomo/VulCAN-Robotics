@@ -5,7 +5,11 @@ VulCAN est un bras robotique conçu pour être le plus fiable possible en exploi
 
 ## Pour commencer
 
-Pour commencer, veillez à héberger ce projet sur une version d'Ubuntu 20.04 ou 22.04. L'installation suivante ne permettra peut-être pas d'être utilisée sur d'autres systèmes d'exploitation.
+Le projet se divise en deux parties : 
+
+- Sender:
+
+- Receiver:
 
 ### Pré-requis
 
