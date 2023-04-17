@@ -35,6 +35,7 @@ Installez le package ESP32 sur Arduino IDE via les preferences :
     <img width="795" alt="Capture d’écran 2023-04-17 à 14 29 44" src="https://user-images.githubusercontent.com/71334330/232485206-3e3956b8-019d-4d20-9b7d-31b446f0c80e.png">
 
 - Vous pourrez ensuite installer le package esp32 via le Boards Manager : 
+
     <img width="251" alt="Capture d’écran 2023-04-17 à 14 28 30" src="https://user-images.githubusercontent.com/71334330/232485251-a5767f09-521f-4158-a60d-03b39c085013.png">
 ...
 
