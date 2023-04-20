@@ -15,7 +15,24 @@
 #include "ESP32_CAN_CTRL.h"
 
 
-void canSender() {
+void CAN_Setup(int RX_PIN, int TX_PIN) {
+  
+  Serial.println("Initiating CAN Receiver/Receiver");
+
+  // Set the pins
+  CAN.setPins(RX_PIN, TX_PIN);
+
+  // start the CAN bus at 500 kbps
+  if (!CAN.begin(500E3)) {
+    Serial.println("Starting CAN failed!");
+    while (1)
+      ;
+  } else {
+    Serial.println("CAN Initialized");
+  }
+}
+
+void CAN_Sender() {
   // send packet: id is 11 bits, packet can contain up to 8 bytes of data
   Serial.print("Sending packet ... ");
 
@@ -46,7 +63,7 @@ void canSender() {
   delay(1000);
 }
 
-void canReceiver() {
+void CAN_Receiver() {
   // try to parse packet
   int packetSize = CAN.parsePacket();
 

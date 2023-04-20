@@ -1,32 +1,26 @@
 #include <ESP32_CAN_CTRL.h>
+#include <IMU.h>
 
-#define TX_GPIO_NUM 32  // Connects to CTX
-#define RX_GPIO_NUM 33  // Connects to CRX
+#define RX_GPIO_NUM 33  // Connects to CAN RX
+#define TX_GPIO_NUM 32  // Connects to CAN TX
 
-
+#define SDA 21
+#define SCL 22
 
 void setup() {
   Serial.begin(115200);
+  Wire.begin();
   while (!Serial)
     ;
   delay(1000);
-
-  Serial.println("CAN Receiver/Receiver");
-
-  // Set the pins
-  CAN.setPins(RX_GPIO_NUM, TX_GPIO_NUM);
-
-  // start the CAN bus at 500 kbps
-  if (!CAN.begin(500E3)) {
-    Serial.println("Starting CAN failed!");
-    while (1)
-      ;
-  } else {
-    Serial.println("CAN Initialized");
-  }
+  CAN_Setup(RX_GPIO_NUM, TX_GPIO_NUM);
+  IMU_Setup();
 }
 
 void loop() {
-    canSender();
+    CAN_Sender();
+    // Get_IMU();
+    get_Y_axis();
+    // canReceiver();
     delay(1000);
 }

@@ -4,8 +4,9 @@
 #include <Arduino.h>
 #include <CAN.h>
 
-void canSender();
-void canReceiver();
+void CAN_Setup(int rx, int tx);
+void CAN_Sender();
+void CAN_Receiver();
 void parseMessage(char* data);
 // void sendData(char* dataToSend);
 
