@@ -1,5 +1,6 @@
 #include "Wire.h"
 #include <MPU6050_light.h>
+#include <math.h>
 
 MPU6050 mpu(Wire);
 unsigned long timer = 0;
@@ -27,11 +28,11 @@ void Get_IMU() {
   
   if((millis()-timer)>10){ // print data every 10ms
 	Serial.print("X : ");
-	Serial.print(mpu.getAngleX());
+	Serial.print((int)round(mpu.getAngleX()));
 	Serial.print("\tY : ");
-	Serial.print(mpu.getAngleY());
+	Serial.print((int)round(mpu.getAngleY()));
 	Serial.print("\tZ : ");
-	Serial.println(mpu.getAngleZ());
+	Serial.println((int)round(mpu.getAngleZ()));
 	timer = millis();  
   }
 }
