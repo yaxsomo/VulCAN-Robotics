@@ -5,6 +5,7 @@
 #include <CAN.h>
 
 void CAN_Setup(int rx, int tx);
+void sendCommands(int Z, int X);
 void CAN_Sender();
 void CAN_Receiver();
 void parseMessage(char* data);

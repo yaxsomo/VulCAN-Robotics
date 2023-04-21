@@ -1,12 +1,18 @@
 #ifndef IMU_h
 #define IMU_h
 
-#include <Adafruit_MPU6050.h>
-#include <Adafruit_Sensor.h>
-#include <Wire.h>
+#include "Wire.h"       
+#include "I2Cdev.h"     
+#include "MPU6050.h" 
+
+struct angles {
+  float z_angle;
+  float x_angle;
+};
 
 void IMU_Setup();
-int* Get_IMU();
-float get_Y_axis();
-
+angles Get_IMU();
+byte get_Z_axis();
+byte get_X_axis();
+void calibrate_IMU();
 #endif
