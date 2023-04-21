@@ -16,7 +16,6 @@
 #include <motors.h>
 #include <IMU.h>
 
-
 void CAN_Setup(int RX_PIN, int TX_PIN)
 {
 
@@ -51,7 +50,7 @@ void CAN_Sender()
 
   CAN.beginPacket(0x13);
 
-  CAN.write(get_Y_axis());
+  CAN.write(get_X_axis());
   CAN.endPacket();
 
   // RTR packet with a requested data length
@@ -116,7 +115,7 @@ void CAN_Receiver()
           break;
         }
       }
-        turn_servos(f,g);
+        convert_360_to_180(f,g);
         Serial.print("Sent coordinate Z : ");
         Serial.print(f);
         Serial.print(" and X : ");

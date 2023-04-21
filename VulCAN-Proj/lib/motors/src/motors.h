@@ -12,7 +12,6 @@ extern Servo servo_x; // declare the servo_x object as external
 extern Servo servo_y; // declare the servo_y object as external
 
 void servo_setup(); // function prototype for servo setup
-
-void turn_servos(float pos_Z, float pos_X);
-
+void convert_360_to_180(int z, int x);
+void turn_servos(int pos_Z, int pos_X);
 #endif /* MOTORS_H */
