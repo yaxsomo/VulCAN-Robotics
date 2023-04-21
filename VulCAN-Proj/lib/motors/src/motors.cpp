@@ -24,9 +24,15 @@ void turn_servos(int pos_Z, int pos_X)
 {
     // moving servo_x according to pos_x
     servo_x.write(pos_Z);
+    Serial.print("Moving servo to : ");
+    Serial.println(pos_Z);
+
 
     // moving servo_y according to pos_y
     servo_y.write(pos_X);
+
+    Serial.print("Moving servo X to : ");
+    Serial.println(pos_X);
 }
 
 // Resets the servo motors to their initial position of 90 degrees

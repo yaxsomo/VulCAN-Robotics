@@ -20,20 +20,20 @@ void setup()
   CAN_Setup(RX_GPIO_NUM, TX_GPIO_NUM);
 
   // IF SENDER
-  IMU_Setup();
+  // IMU_Setup();
 
   // IF RECEIVER
-  // servo_setup();
+  servo_setup();
 }
 
 void loop()
 {
 
   // IF SENDER
-  CAN_Sender();
+  // CAN_Sender();
 
   // IF RECEIVER 
-  //CAN_Receiver();
+  CAN_Receiver();
 
   delay(1000);
 }

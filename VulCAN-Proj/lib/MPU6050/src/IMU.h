@@ -7,8 +7,10 @@
 void IMU_Setup();
 void Get_IMU();
 
-int get_Z_axis();
-int get_Y_axis();
-int get_X_axis();
+char *get_Z_axis();
+char *get_Y_axis();
+char *get_X_axis();
+char* int_to_char_with_sign(int value);
+// char *get_Y_axis2();
 // void calibrate_IMU();
 #endif

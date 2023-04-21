@@ -48,56 +48,62 @@ void CAN_Setup(int RX_PIN, int TX_PIN)
   }
 }
 
-void CAN_Sender()
-{
-  uint8_t Z = int_to_uint8(get_Z_axis());
-  uint8_t X = int_to_uint8(get_X_axis());
+void CAN_Sender() {
+
+  char *Z = get_Z_axis();
+  char *X = get_X_axis();
+  // char Z[] = {'1','8','0','\0'};
+  // char X[] = {'-','1','8','0','\0'};
+ 
   // send packet: id is 11 bits, packet can contain up to 8 bytes of data
-  Serial.print("Sending packet ... ");
+  Serial.println("Sending packet ... ");
+
+// Envoie du premier paquet avec l'ID 0x12
 
   CAN.beginPacket(0x12); // sets the ID and clears the transmit buffer
   // CAN.beginExtendedPacket(0xabcdef);
 
-  CAN.write(Z);
-  Serial.print("Z : ");
-  Serial.print(Z);
+  for (int i = 0 ; i < strlen(Z); i++) {
+    CAN.write(Z[i]);
+  }
+  Serial.println(Z);
   CAN.endPacket();
 
-  CAN.beginPacket(0x13);
+// Envoie du deuxieme paquet avec l'ID 0x13
 
-  CAN.write(X);
-  Serial.print(", X : ");
+  CAN.beginPacket(0x13);
+  for (int i = 0 ; i < strlen(X); i++) {
+    CAN.write(X[i]);
+  }
   Serial.println(X);
+
   CAN.endPacket();
 
   // RTR packet with a requested data length
   //  CAN.beginPacket (0x13, 3, true);
   //  CAN.endPacket();
 
-  Serial.println("done");
+  Serial.println("packet sent");
 
-  // delay(1000);
 }
 
 void CAN_Receiver()
 {
-  int f = 0;
-  int g = 0;
-  // try to parse packet
+
+  int pos_Z = 0;
+  int pos_X = 0;
+   // try to parse packet
   int packetSize = CAN.parsePacket();
 
-  if (packetSize)
-  {
+  if (packetSize || CAN.packetId() != -1) {
     // received a packet
     Serial.print("Received ");
 
-    if (CAN.packetExtended())
-    {
+    if (CAN.packetExtended()) {
       Serial.print("extended ");
     }
 
-    if (CAN.packetRtr())
-    {
+    if (CAN.packetRtr()) {
       // Remote transmission request, packet contains no data
       Serial.print("RTR ");
     }
@@ -105,40 +111,36 @@ void CAN_Receiver()
     Serial.print("packet with id 0x");
     Serial.print(CAN.packetId(), HEX);
 
-    if (CAN.packetRtr())
-    {
+    if (CAN.packetRtr()) {
       Serial.print(" and requested length ");
       Serial.println(CAN.packetDlc());
-    }
-    else
-    {
+    } else {
       Serial.print(" and length ");
       Serial.println(packetSize);
 
       // only print packet data for non-RTR packets
-      while (CAN.available())
-      {
-        Serial.println(CAN.read());
-        switch (CAN.packetId())
-        {
+      while (CAN.available()) {
+
+        switch(CAN.packetId()) {
+
         case 0x12:
-          f = cuint8_to_int(CAN.read());
-          break;
+            pos_Z = CAN.read();
+            Serial.println((char)CAN.read());
+            break;
         case 0x13:
-          g = cuint8_to_int(CAN.read());
+            pos_X = CAN.read();
+            Serial.println((int)CAN.read());
           break;
         default:
-          Serial.print("Bad packet ID");
+          Serial.println("BAD PACKET ID");
           break;
         }
+        turn_servos(pos_Z, pos_X);
+        Serial.print((int)CAN.read());
       }
-        convert_360_to_180(f,g);
-        Serial.print("Sent coordinate Z : ");
-        Serial.print(f);
-        Serial.print(" and X : ");
-        Serial.print(g);
-        Serial.println(" To the motors ");
+      Serial.println();
     }
+
     Serial.println();
   }
 }

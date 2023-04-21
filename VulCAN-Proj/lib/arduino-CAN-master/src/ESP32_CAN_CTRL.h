@@ -9,6 +9,10 @@ void sendCommands(float Z, float X);
 void CAN_Sender();
 void CAN_Receiver();
 void parseMessage(char* data);
+uint8_t int_to_uint8(int valeur);
+int cuint8_to_int(uint8_t valeur_uint8);
+
+
 // void sendData(char* dataToSend);
 
 #endif // _CAN_H_
