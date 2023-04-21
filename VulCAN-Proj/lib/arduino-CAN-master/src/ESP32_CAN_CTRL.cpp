@@ -45,11 +45,6 @@ void CAN_Sender()
 
   CAN.beginPacket(0x12); // sets the ID and clears the transmit buffer
   // CAN.beginExtendedPacket(0xabcdef);
-  CAN.write('h'); // write data to buffer. data is not sent until endPacket() is called.
-  CAN.write('e');
-  CAN.write('l');
-  CAN.write('l');
-  CAN.write('o');
   // CAN.write(get_Z_axis());
   CAN.endPacket();
 

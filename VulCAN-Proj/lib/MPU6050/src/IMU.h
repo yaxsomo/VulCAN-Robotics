@@ -2,17 +2,11 @@
 #define IMU_h
 
 #include "Wire.h"       
-#include "I2Cdev.h"     
-#include "MPU6050.h" 
-
-struct angles {
-  float z_angle;
-  float x_angle;
-};
+#include "MPU6050_light.h" 
 
 void IMU_Setup();
-angles Get_IMU();
-byte get_Z_axis();
-byte get_X_axis();
-void calibrate_IMU();
+void Get_IMU();
+// byte get_Z_axis();
+// byte get_X_axis();
+// void calibrate_IMU();
 #endif
