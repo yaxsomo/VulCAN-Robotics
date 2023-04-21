@@ -6,7 +6,9 @@
 
 void IMU_Setup();
 void Get_IMU();
-// byte get_Z_axis();
-// byte get_X_axis();
+
+int get_Z_axis();
+int get_Y_axis();
+int get_X_axis();
 // void calibrate_IMU();
 #endif

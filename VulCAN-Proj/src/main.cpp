@@ -17,15 +17,15 @@ void setup()
     ;
   delay(1000);
   // servo_setup();
-  // CAN_Setup(RX_GPIO_NUM, TX_GPIO_NUM);
+  CAN_Setup(RX_GPIO_NUM, TX_GPIO_NUM);
   IMU_Setup();
 }
 
 void loop()
 {
-  // CAN_Sender();
+  CAN_Sender();
   // CAN_Receiver();
-  Get_IMU();
+  // Get_IMU();
   // get_Z_axis();
   // get_X_axis();
   // delay(1000);

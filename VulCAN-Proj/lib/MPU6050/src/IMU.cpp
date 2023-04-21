@@ -36,3 +36,24 @@ void Get_IMU() {
 	timer = millis();  
   }
 }
+
+
+// the functions to get the 3 axis positions : 
+
+int get_X_axis() {
+  mpu.update();
+    delay(10);
+    return (int)round(mpu.getAngleX());
+}
+
+int get_Y_axis() {
+  mpu.update();
+    delay(10);
+    return (int)round(mpu.getAngleY());
+}
+
+int get_Z_axis() {
+  mpu.update();
+    delay(10);
+    return (int)round(mpu.getAngleZ());
+}

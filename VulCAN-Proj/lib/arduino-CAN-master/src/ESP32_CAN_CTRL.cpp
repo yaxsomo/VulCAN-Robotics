@@ -45,16 +45,13 @@ void CAN_Sender()
 
   CAN.beginPacket(0x12); // sets the ID and clears the transmit buffer
   // CAN.beginExtendedPacket(0xabcdef);
-  // CAN.write(get_Z_axis());
+
+  CAN.write(get_Z_axis());
   CAN.endPacket();
 
   CAN.beginPacket(0x13);
-  CAN.write('w');
-  CAN.write('o');
-  CAN.write('r');
-  CAN.write('l');
-  CAN.write('d');
-  // CAN.write(get_X_axis());
+
+  CAN.write(get_Y_axis());
   CAN.endPacket();
 
   // RTR packet with a requested data length
@@ -68,8 +65,8 @@ void CAN_Sender()
 
 void CAN_Receiver()
 {
-  float f;
-  float g;
+  int f;
+  int g;
   // try to parse packet
   int packetSize = CAN.parsePacket();
 
