@@ -28,5 +28,5 @@ void loop()
   // Get_IMU();
   // get_Z_axis();
   // get_X_axis();
-  // delay(1000);
+  delay(1000);
 }

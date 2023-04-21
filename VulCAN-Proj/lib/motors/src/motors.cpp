@@ -11,9 +11,6 @@ Servo servo_y; // create servo object to control a servo
 
 int init_pos = 0; // variable to store the servo position
 
-
-
-
 void servo_setup()
 {
     servo_x.attach(SERVO_PIN_X); // attaches the servo on pin 26 to the servo object

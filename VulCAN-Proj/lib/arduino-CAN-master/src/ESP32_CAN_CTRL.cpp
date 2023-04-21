@@ -15,6 +15,17 @@
 #include <ESP32_CAN_CTRL.h>
 #include <motors.h>
 #include <IMU.h>
+#include <stdint.h>
+
+uint8_t int_to_uint8(int valeur) {
+    uint8_t valeur_uint8 = (uint8_t)valeur; // conversion explicite en uint_8
+    return valeur_uint8;
+}
+
+int cuint8_to_int(uint8_t valeur_uint8) {
+    int valeur = (int)valeur_uint8; // conversion explicite en int
+    return valeur;
+}
 
 void CAN_Setup(int RX_PIN, int TX_PIN)
 {
@@ -39,18 +50,24 @@ void CAN_Setup(int RX_PIN, int TX_PIN)
 
 void CAN_Sender()
 {
+  uint8_t Z = int_to_uint8(get_Z_axis());
+  uint8_t X = int_to_uint8(get_X_axis());
   // send packet: id is 11 bits, packet can contain up to 8 bytes of data
   Serial.print("Sending packet ... ");
 
   CAN.beginPacket(0x12); // sets the ID and clears the transmit buffer
   // CAN.beginExtendedPacket(0xabcdef);
 
-  CAN.write(get_Z_axis());
+  CAN.write(Z);
+  Serial.print("Z : ");
+  Serial.print(Z);
   CAN.endPacket();
 
   CAN.beginPacket(0x13);
 
-  CAN.write(get_X_axis());
+  CAN.write(X);
+  Serial.print(", X : ");
+  Serial.println(X);
   CAN.endPacket();
 
   // RTR packet with a requested data length
@@ -59,13 +76,13 @@ void CAN_Sender()
 
   Serial.println("done");
 
-  delay(1000);
+  // delay(1000);
 }
 
 void CAN_Receiver()
 {
-  int f;
-  int g;
+  int f = 0;
+  int g = 0;
   // try to parse packet
   int packetSize = CAN.parsePacket();
 
@@ -105,10 +122,10 @@ void CAN_Receiver()
         switch (CAN.packetId())
         {
         case 0x12:
-          f = CAN.read();
+          f = cuint8_to_int(CAN.read());
           break;
         case 0x13:
-          g = CAN.read();
+          g = cuint8_to_int(CAN.read());
           break;
         default:
           Serial.print("Bad packet ID");
@@ -121,8 +138,6 @@ void CAN_Receiver()
         Serial.print(" and X : ");
         Serial.print(g);
         Serial.println(" To the motors ");
-        f = 0;
-        g = 0;
     }
     Serial.println();
   }
