@@ -11,22 +11,29 @@
 
 void setup()
 {
+
   Serial.begin(115200);
   Wire.begin();
   while (!Serial)
     ;
   delay(1000);
-  // servo_setup();
   CAN_Setup(RX_GPIO_NUM, TX_GPIO_NUM);
+
+  // IF SENDER
   IMU_Setup();
+
+  // IF RECEIVER
+  // servo_setup();
 }
 
 void loop()
 {
+
+  // IF SENDER
   CAN_Sender();
-  // CAN_Receiver();
-  // Get_IMU();
-  // get_Z_axis();
-  // get_X_axis();
+
+  // IF RECEIVER 
+  //CAN_Receiver();
+
   delay(1000);
 }
