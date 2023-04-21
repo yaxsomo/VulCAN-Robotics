@@ -45,18 +45,44 @@ angles Get_IMU() {
   return result;
 }
 
-
-byte get_Z_axis() {
-    mpu.getMotion6(&ax, &ay, &az, &gx, &gy, &gz);
-    data.Z = map(az, -17000, 17000, 0, 255);
-    return data.Z;
+float get_Z_axis() {
+  mpu.getMotion6(&ax, &ay, &az, &gx, &gy, &gz);
+  float Z_angle = atan2(-ax, az) * 180.0 / PI;
+  if (Z_angle < 0) {
+    Z_angle += 360.0;
+  }
+  return Z_angle;
 }
 
-byte get_X_axis() {
-      mpu.getMotion6(&ax, &ay, &az, &gx, &gy, &gz);
-    data.X = map(ax, -17000, 17000, 0, 255);
-    return data.X;
+float get_X_axis() {
+  mpu.getMotion6(&ax, &ay, &az, &gx, &gy, &gz);
+  float X_angle = atan2(ay, az) * 180.0 / PI;
+  if (X_angle < 0) {
+    X_angle += 360.0;
+  }
+  return X_angle;
 }
+
+
+// float get_Z_axis() {
+//     mpu.getMotion6(&ax, &ay, &az, &gx, &gy, &gz);
+//     data.Z = map(az, -17000, 17000, 0, 255);
+//     Serial.print("Z: ");
+//     Serial.print(data.Z);
+//     Serial.print(", ");
+
+//     return (float)data.Z;
+// }
+
+// float get_X_axis() {
+//     mpu.getMotion6(&ax, &ay, &az, &gx, &gy, &gz);
+//     data.X = map(ax, -17000, 17000, 0, 255);
+//     Serial.print("X: ");
+//     Serial.println(data.X);
+
+//     return (float)data.X;
+// }
+
 void calibrate_IMU() {
 
 }

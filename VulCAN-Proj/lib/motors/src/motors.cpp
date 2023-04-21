@@ -20,13 +20,13 @@ void servo_setup()
     servo_y.write(init_pos); // initializes the servo_y to idle position
 }
 
-void turn_servos(int pos_Z, int pos_X)
+void turn_servos(float pos_Z, float pos_X)
 {
     // moving servo_x according to pos_x
-    servo_x.write(pos_Z);
+    servo_x.write((int)pos_Z);
 
     // moving servo_y according to pos_y
-    servo_y.write(pos_X);
+    servo_y.write((int)pos_X);
 }
 
 // Resets the servo motors to their initial position of 90 degrees

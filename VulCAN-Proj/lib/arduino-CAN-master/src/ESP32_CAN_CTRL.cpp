@@ -16,10 +16,6 @@
 #include <motors.h>
 #include <IMU.h>
 
-void sendCommands(int Z, int X)
-{
-  turn_servos(Z,X);
-}
 
 void CAN_Setup(int RX_PIN, int TX_PIN)
 {
@@ -49,21 +45,21 @@ void CAN_Sender()
 
   CAN.beginPacket(0x12); // sets the ID and clears the transmit buffer
   // CAN.beginExtendedPacket(0xabcdef);
-  // CAN.write('h'); // write data to buffer. data is not sent until endPacket() is called.
-  // CAN.write('e');
-  // CAN.write('l');
-  // CAN.write('l');
-  // CAN.write('o');
-  CAN.write(get_Z_axis());
+  CAN.write('h'); // write data to buffer. data is not sent until endPacket() is called.
+  CAN.write('e');
+  CAN.write('l');
+  CAN.write('l');
+  CAN.write('o');
+  // CAN.write(get_Z_axis());
   CAN.endPacket();
 
   CAN.beginPacket(0x13);
-  // CAN.write('w');
-  // CAN.write('o');
-  // CAN.write('r');
-  // CAN.write('l');
-  // CAN.write('d');
-  CAN.write(get_X_axis());
+  CAN.write('w');
+  CAN.write('o');
+  CAN.write('r');
+  CAN.write('l');
+  CAN.write('d');
+  // CAN.write(get_X_axis());
   CAN.endPacket();
 
   // RTR packet with a requested data length
@@ -114,29 +110,28 @@ void CAN_Receiver()
       // only print packet data for non-RTR packets
       while (CAN.available())
       {
-        Serial.print((char)CAN.read());
+        Serial.println(CAN.read());
         switch (CAN.packetId())
         {
         case 0x12:
-          f = (float)CAN.read();
+          f = CAN.read();
           break;
         case 0x13:
-          g = (float)CAN.read();
+          g = CAN.read();
           break;
         default:
           Serial.print("Bad packet ID");
           break;
         }
-        if (!f && !g) {
-
-        sendCommands(f, g);
+      }
+        turn_servos(f,g);
         Serial.print("Sent coordinate Z : ");
         Serial.print(f);
-        Serial.print("Sent coordinate X : ");
+        Serial.print(" and X : ");
         Serial.print(g);
-        Serial.println("To the motors ");
-        }
-      }
+        Serial.println(" To the motors ");
+        f = 0;
+        g = 0;
     }
     Serial.println();
   }

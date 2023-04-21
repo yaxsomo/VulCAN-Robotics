@@ -3,7 +3,6 @@
 #include <IMU.h>
 #include <Arduino.h>
 
-
 #define RX_GPIO_NUM 33 // Connects to CAN RX
 #define TX_GPIO_NUM 32 // Connects to CAN TX
 
@@ -19,15 +18,16 @@ void setup()
   delay(1000);
   servo_setup();
   CAN_Setup(RX_GPIO_NUM, TX_GPIO_NUM);
-  IMU_Setup();
+
+  // IMU_Setup();
 }
 
 void loop()
 {
-  CAN_Sender();
+  // CAN_Sender();
+  CAN_Receiver();
   // Get_IMU();
-  get_Z_axis();
-  get_X_axis();
-  // canReceiver();
+  // get_Z_axis();
+  // get_X_axis();
   delay(1000);
 }
