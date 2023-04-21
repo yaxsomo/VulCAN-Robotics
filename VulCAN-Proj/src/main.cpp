@@ -1,6 +1,7 @@
 #include <motors.h>
 #include <ESP32_CAN_CTRL.h>
 #include <IMU.h>
+#include <Arduino.h>
 
 
 #define RX_GPIO_NUM 33 // Connects to CAN RX
