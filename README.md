@@ -1,5 +1,5 @@
 # VulCAN-Robotics
-Dedicated repository for the development of the Robotics System VulCAN
+Repo dédiée à la preuve de concept pour la communication entre composants du bras robotique VulCAN
 
 VulCAN est un bras robotique conçu pour être le plus fiable possible en exploitant le protocole de communication CAN Bus.
 
