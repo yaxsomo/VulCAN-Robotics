@@ -15,10 +15,17 @@ Le projet se divise en deux parties :
 
 Pour lancer ce projet, veuillez avoir les pré-requis suivants :
 
-- Arduino IDE
-- Les librairies suivantes : 
-    - Composer
-- La construction du prototype pour la communication
+- PlatformIO (Plug-in VSCode)
+- Les dependances indiqués dans le fichier 'VulCAN-Proj/platformio.ini' : 
+
+``ìni
+lib_deps = 
+	Wire
+	CAN
+	roboticsbrno/ServoESP32@^1.0.3
+	rfetick/MPU6050_light@^1.1.0
+```
+- Le prototype fonctionnel
 
 ### Installation
 
@@ -26,36 +33,83 @@ Pour commencer, clonez le dépôt de ce projet et ouvrez-le à l'aide des comman
 
 ```bash
 git clone https://github.com/yaxsomo/VulCAN-Robotics.git
-cd VulCAN-Robotics
+cd VulCAN-Robotics/
 ```
 
-Installez le package ESP32 sur Arduino IDE via les preferences : 
-- Ajoutez le lien suivant dans les preferences : 
-    - https://raw.githubusercontent.com/espressif/arduino-esp32/gh-pages/package_esp32_index.json
-    <img width="795" alt="Capture d’écran 2023-04-17 à 14 29 44" src="https://user-images.githubusercontent.com/71334330/232485206-3e3956b8-019d-4d20-9b7d-31b446f0c80e.png">
+Dans la barre laterale, ouvrir l'onglet 'PlatformIO' et selectionner le dossier 'VulCAN-Proj' : 
 
-- Vous pourrez ensuite installer le package esp32 via le Boards Manager : 
+<img width="346" alt="Capture d’écran 2023-04-23 à 15 06 32" src="https://user-images.githubusercontent.com/71334330/233841659-43921ad1-588e-4be2-b57d-d974d486de2f.png">
 
-    <img width="251" alt="Capture d’écran 2023-04-17 à 14 28 30" src="https://user-images.githubusercontent.com/71334330/232485251-a5767f09-521f-4158-a60d-03b39c085013.png">
 
-Tutoriel complete à ce lien : [Tutoriel d'installation](https://randomnerdtutorials.com/installing-the-esp32-board-in-arduino-ide-windows-instructions/)
+- Vous pourrez ensuite vous rendre dans le fichier src/main.cpp et decommenter les methodes en fonction du ESP32 visé :
 
-Il faudra ensuite installer la librairie CAN.h :
+Sender :
 
-[Github CAN.h](https://github.com/sandeepmistry/arduino-CAN)
+```cpp
+void setup()
+{
+
+
+  // IF SENDER
+  IMU_Setup();
+
+  // IF RECEIVER
+  // servo_setup();
+}
+
+void loop()
+{
+
+  // IF SENDER
+  CAN_Sender();
+
+  // IF RECEIVER 
+  // CAN_Receiver();
+
+  delay(1000);
+}
+```
+
+Receiver :
+
+```cpp
+void setup()
+{
+
+
+  // IF SENDER
+  //IMU_Setup();
+
+  // IF RECEIVER
+  servo_setup();
+}
+
+void loop()
+{
+
+  // IF SENDER
+  // CAN_Sender();
+
+  // IF RECEIVER 
+  CAN_Receiver();
+
+  delay(1000);
+}
+```
+
+Une fois cela fait, vous pouvez charger le code sur l'esp32 via cet onglet :
+
+<img width="920" alt="Capture d’écran 2023-04-23 à 15 15 44" src="https://user-images.githubusercontent.com/71334330/233842035-fd4f6d29-92ef-4667-9c32-5ebdf6a6224e.png">
+
 
 ## Démarrage
 
-Pour démarrer le projet, il vous suffira de charger le code dans les deux ESP32, et cliquer sur le bouton RST des cartes.
+....
 
-Et pour finir de vous rentre sur l'url: 
-[http://127.0.0.1:8000](http://127.0.0.1:8000)
-
-Ici vous pourrez controler les stepper motors à l'aide de l'interface graphique
 
 ## Fabriqué avec
 
-* [Arduino IDE](https://docs.arduino.cc) - Editeur de code pour les microcontroleurs
+* [PlatformIO](https://docs.platformio.org/en/latest/) - Editeur de code pour les microcontroleurs
 * [VSCode](https://code.visualstudio.com/) - Editeur de textes
 * [Notre cerveau](https://media.tenor.com/yyTPHle1YdQAAAAC/homer-brain.gif) - Incroyable outil
 
