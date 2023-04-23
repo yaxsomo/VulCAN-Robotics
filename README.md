@@ -87,7 +87,11 @@ Une fois cela fait, vous pouvez charger le code sur l'esp32 via cet onglet :
 
 ## Démarrage
 
-....
+Une fois le code chargé, vous pourrez ouvrir le 'Serial Monitor' pour visualiser les evennements :
+
+
+<img width="954" alt="Capture d’écran 2023-04-23 à 15 49 38" src="https://user-images.githubusercontent.com/71334330/233843762-fb5a0be2-9bf3-453f-a772-cf7e271c4eeb.png">
+
 
 
 ## Fabriqué avec
