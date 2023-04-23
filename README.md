@@ -44,42 +44,22 @@ Dans la barre laterale, ouvrir l'onglet 'PlatformIO' et selectionner le dossier 
 
 - Vous pourrez ensuite vous rendre dans le fichier src/main.cpp et decommenter les methodes en fonction du ESP32 visé :
 
-Sender :
+Exemple Receiver :
 
 ```cpp
+
 void setup()
 {
 
-
-  // IF SENDER
-  IMU_Setup();
-
-  // IF RECEIVER
-  // servo_setup();
-}
-
-void loop()
-{
-
-  // IF SENDER
-  CAN_Sender();
-
-  // IF RECEIVER 
-  // CAN_Receiver();
-
+  Serial.begin(115200);
+  Wire.begin();
+  while (!Serial)
+    ;
   delay(1000);
-}
-```
-
-Receiver :
-
-```cpp
-void setup()
-{
-
+  CAN_Setup(RX_GPIO_NUM, TX_GPIO_NUM);
 
   // IF SENDER
-  //IMU_Setup();
+  // IMU_Setup();
 
   // IF RECEIVER
   servo_setup();
@@ -97,6 +77,8 @@ void loop()
   delay(1000);
 }
 ```
+
+
 
 Une fois cela fait, vous pouvez charger le code sur l'esp32 via cet onglet :
 
