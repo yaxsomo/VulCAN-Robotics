@@ -18,13 +18,14 @@ Pour lancer ce projet, veuillez avoir les pré-requis suivants :
 - PlatformIO (Plug-in VSCode)
 - Les dependances indiqués dans le fichier 'VulCAN-Proj/platformio.ini' : 
 
-``ìni
+``
 lib_deps = 
 	Wire
 	CAN
 	roboticsbrno/ServoESP32@^1.0.3
 	rfetick/MPU6050_light@^1.1.0
 ```
+
 - Le prototype fonctionnel
 
 ### Installation
