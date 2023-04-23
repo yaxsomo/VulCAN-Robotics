@@ -18,7 +18,7 @@ Pour lancer ce projet, veuillez avoir les pré-requis suivants :
 - PlatformIO (Plug-in VSCode)
 - Les dependances indiqués dans le fichier 'VulCAN-Proj/platformio.ini' : 
 
-``
+```ini
 lib_deps = 
 	Wire
 	CAN
